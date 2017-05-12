@@ -4,7 +4,7 @@ angular.module('app',[
   'app.input',
   'app.dashboard',
   'app.auth',
-  'app.services'
+  'app.services',
 ])
 .config(function($locationProvider, $routeProvider, $mdThemingProvider, $httpProvider) {
   $locationProvider.hashPrefix('');
@@ -37,7 +37,7 @@ angular.module('app',[
     }
 
     $scope.handleDashboardClick = function() {
-      $location.path('dashboard');
+      $location.path('googleDashboard');
     }
 
     $scope.handleInputClick = function() {
@@ -621,7 +621,6 @@ angular.
             <div style="display: flex; justify-content: flex-end; align-items: flex-end;">
 
               <md-button class="md-primary md-raised" ng-click="$ctrl.showTabDialog(savedJob)" >
-
                 Details
               </md-button>
               <md-checkbox ng-checked="savedJob.toDelete" ng-click="$ctrl.toggleDelete(savedJob)"></md-checkbox>
@@ -657,21 +656,6 @@ angular.
                 this.getSavedJobs();
               });
           }
-        });
-      };
-
-      this.showTabDialog = function(ev) {
-        $mdDialog.show({
-          // controller: this,
-          templateUrl: 'app/components/savedJobsDetailsTab.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true
-        })
-        .then(function(answer) {
-          this.status = 'You said the information was "' + answer + '".';
-        }, function() {
-          this.status = 'You cancelled the dialog.';
         });
       };
 

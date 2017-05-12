@@ -24,7 +24,7 @@ angular.module('app', ['ngRoute', 'ngMaterial', 'app.input', 'app.dashboard', 'a
   };
 
   $scope.handleDashboardClick = function () {
-    $location.path('dashboard');
+    $location.path('googleDashboard');
   };
 
   $scope.handleInputClick = function () {
@@ -162,7 +162,6 @@ angular.module('jobWidget').component('jobWidget', {
         var confirmDelete = $mdDialog.confirm().title('Delete!').textContent('Delete Job?').ariaLabel('Confirm Delete').targetEvent(ev).ok('Yes').cancel('No');
 
         var confirmSave = $mdDialog.confirm().title('Save!').textContent('Save Job?').ariaLabel('Confirm Save').targetEvent(ev).ok('Yes').cancel('No');
-
 
         var promptForInterviewQuestions = $mdDialog.prompt().title('Were you asked any specific interview questions?').textContent('Write down some you would like to remember!').initialValue('Ex. Balance this search tree!').ok('Submit');
 
@@ -309,9 +308,7 @@ angular.module('profileWidget').component('profileWidget', {
 angular.module('savedJobsWidget', []);
 
 angular.module('savedJobsWidget').component('savedJobsWidget', {
-
   template: '\n    <md-card id="saved-jobs-widget" class=\'widget\'>\n\n      <div style="display: flex; justify-content: space-between">\n        <span></span>\n        <span class="md-headline">Saved Jobs</span>\n        <md-button class="md-icon-button" ng-click="$ctrl.deleteAll()">\n            <md-icon>delete</md-icon>\n        </md-button>\n      </div>\n\n      <md-divider></md-divider>\n\n      <md-content">\n\n        <ul>\n          <li ng-repeat="savedJob in $ctrl.savedJobsList" style="display: flex; justify-content: space-between; align-items: center">\n            <div style="display: flex; justify-content: space-around; align-items: center;">\n              <b style="padding-right: 10px">{{savedJob.company}}</b>\n              <p>{{savedJob.position}}</p>\n            </div>\n            <div style="display: flex; justify-content: flex-end; align-items: flex-end;">\n\n              <md-button class="md-primary md-raised" ng-click="$ctrl.showTabDialog(savedJob)" >\n                Details\n              </md-button>\n              <md-checkbox ng-checked="savedJob.toDelete" ng-click="$ctrl.toggleDelete(savedJob)"></md-checkbox>\n            </div>\n          </li>\n        </ul>\n\n\n      </md-content>\n    </md-card>\n    ',
-
   controller: function controller($log, $mdDialog, SavedJobs) {
 
     this.getSavedJobs = function () {
@@ -342,7 +339,6 @@ angular.module('savedJobsWidget').component('savedJobsWidget', {
         }
       });
     };
-
 
     var that = this;
     this.showTabDialog = function (savedJob) {
