@@ -15,11 +15,14 @@ angular.module('app.services', [])
 				return res.data;
 			})
 			.catch(function(err) {
-				console.log(err);
+				alert('Your URL might be wrong! Try Again!');
+				$route.reload();
+				// console.log(err);
 			});
 		}
   };
 })
+
 .factory('News', ($http) => {
   var getNews = companiesArray => {
     return Promise.all(companiesArray.map(comp => {
@@ -44,6 +47,35 @@ angular.module('app.services', [])
   return {
     getNews: getNews
   }
+})
+
+.factory('Tweets', function($http) {
+	var getTweets = function(handlesArray) {
+		return $http.post('/api/twitter', handlesArray)
+			.then(function(res) {
+				console.log("Tweets recieved by factory");
+				//console.log(res.data);
+				return res.data
+			})
+			.catch(function(err) {
+				console.error("Failed Tweets.factory fetching tweets...");
+				console.error(err);
+			});
+	}
+
+	return {
+		getTweets : getTweets
+	}
+})
+
+.factory('InsertFactory', function(){
+	var obj = {}
+
+	 obj.addTo = function(value) {
+		obj.jobs = value;
+	}
+
+	return obj;
 })
 
 .factory('User', function($http) {
@@ -151,7 +183,20 @@ angular.module('app.services', [])
 				}
 			})
 			.then(function(res) {
-				return res.data
+				return res.data;
+			});
+		},
+		saveAndDelete: function(jobData) {
+			return $http({
+				method: 'POST',
+				url: 'api/savedJobs',
+				data: jobData,
+				headers: {
+					'Content-type': 'application/json;charset=utf-8'
+				}
+			})
+			.then(function(res) {
+				return res.data;
 			})
 		}
 	}
@@ -215,6 +260,33 @@ angular.module('app.services', [])
 		}
 	}
 })
+
+.factory('SavedJobs', function($http) {
+	return {
+			get: function() {
+				return $http({
+					method: 'GET',
+					url: 'api/savedJobs'
+				})
+				.then(function(res) {
+					return res.data;
+				})
+			},
+			delete: function(data) {
+				return $http({
+					method: 'DELETE',
+					url: '/api/savedJobs',
+					data: data,
+					headers: {
+						'Content-type': 'application/json;charset=utf-8'
+					}
+				})
+				.then(function(res) {
+					return res.data;
+				});
+		}
+	}
+})
 .factory('Auth', ($http, $location) => {
 
   var register = (user) => {
@@ -232,8 +304,9 @@ angular.module('app.services', [])
     .then(res => {
       $location.path('/dashboard')
     }, res => {
-      $location.path('/')
-      alert(res.data.err.message)
+      $location.path('/');
+			console.log(res.data.err.message);
+      alert(res.data.err);
     })
   };
 
