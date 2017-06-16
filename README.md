@@ -4,9 +4,12 @@ Job Search Management Tool
 
 Job seekers can use this dashboard to plan and manage the entire job application process.
 
+## Preview
+![Gif of application](/client/assets/linkedList.gif)
+
 # Live Demo
 
-http://hrnyc7-europa.herokuapp.com
+http://linkedlist-io.herokuapp.com
 
 ## Team
 
