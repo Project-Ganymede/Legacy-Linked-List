@@ -15,7 +15,7 @@ http://linkedlist-io.herokuapp.com
 
   - __Product Owner__: Thomas O'Connor
   - __Scrum Master__: Willian Hua
-  - __Development Team Members__: Arturo Ruvalcaba, Joel Camacho
+  - __Development Team Members__: Arturo Ruvalcaba, Joel Camacho, Kendrick Schuettler, Alex Biczak, Duncan Pedersen
 
 ## Table of Contents
 
